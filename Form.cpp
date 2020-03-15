@@ -1,12 +1,14 @@
 #include "Form.h"
 #include <stdexcept>
-#include "Lab1Form.h"
-
-
-Form::Form(bool IsMainWindow)
+Form::Form(LPCWSTR title)
 {
-
-	
+	this->Title = title;
+}
+Form::Form(LPCWSTR className, LPCWSTR title, HWND mainHwnd)
+{
+	this->ClassName = className;
+	this->Title = title;
+	this->MainHwnd = mainHwnd;
 }
 
 int Form::Run()
@@ -46,7 +48,7 @@ void Form::CreateForm()
 	Wc.hIcon = LoadIcon(nullptr, IDI_APPLICATION);
 	Wc.hInstance = GetModuleHandle(nullptr);
 	Wc.lpfnWndProc = ApplicationProc;
-	Wc.lpszClassName = L"MyApp";
+	Wc.lpszClassName = (ClassName) ? ClassName : L"Default";
 	Wc.lpszMenuName = nullptr;
 	Wc.style = CS_VREDRAW | CS_HREDRAW;
 
@@ -61,13 +63,13 @@ void Form::CreateForm()
 	Hwnd = CreateWindowEx(
 		0,
 		Wc.lpszClassName,
-		L"App",
+		Title,
 		WS_SYSMENU | WS_MINIMIZEBOX,
 		GetSystemMetrics(SM_CXSCREEN) - windowRC.right / 2,
 		GetSystemMetrics(SM_CYSCREEN) - windowRC.bottom / 2,
 		windowRC.right,
 		windowRC.bottom,
-		nullptr,
+		MainHwnd,/////
 		nullptr,
 		nullptr,
 		this);
@@ -75,11 +77,9 @@ void Form::CreateForm()
 	if (!this->Hwnd)
 			throw std::runtime_error("Error can't create window!!");
 
-	
 
 
-
-
+	/*auto a = (ClassName) ? ClassName : ;*/
 	
 	//ShowWindow(Hwnd, /*nCmdShow*/nShowCmd); // îòðèñîâêà îêíà 
 	//UpdateWindow(Hwnd);  // îáíîâëåíèå îêíà 
@@ -101,8 +101,8 @@ void Form::ÑreateFormControls()
 	if (!this->HwndButton || !this->HwndButton2)
 		throw std::runtime_error("Error can't register window class");*/
 
-	
 }
+
 
 
 LRESULT Form::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
@@ -126,9 +126,6 @@ LRESULT Form::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 	
 	return DefWindowProc(hWnd, uMsg, wParam, lParam);
 
-
-
-	
 }
 
 LRESULT Form::ApplicationProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)

@@ -13,7 +13,8 @@
 		virtual LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 		virtual void CreateForm();
 		virtual void ÑreateFormControls();
-		Form(bool IsMainWindow);
+		Form(LPCWSTR title);
+		Form(LPCWSTR className, LPCWSTR title,HWND mainHwnd);
 		~Form() = default;
 	
 	public:
@@ -21,6 +22,10 @@
 		int Run();
 
 	private:
+ 	    
+		HWND MainHwnd;
+		LPCWSTR ClassName;
+		LPCWSTR Title;
 		static LRESULT CALLBACK ApplicationProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 	
 };
