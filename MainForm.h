@@ -1,6 +1,7 @@
 #pragma once
 #include "Form.h"
 
+
 class MainForm final : public Form
 {
 	enum class CTL_ID
@@ -17,6 +18,7 @@ class MainForm final : public Form
 	void ButtonClick();
 	void Button2Click();
 	void NewFormButtonClick();
+	
 public:
 	MainForm(LPCWSTR title);
 	~MainForm();

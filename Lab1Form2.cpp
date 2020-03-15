@@ -1,5 +1,6 @@
 #include "Lab1Form2.h"
 
+
 LRESULT Lab1Form2::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
 

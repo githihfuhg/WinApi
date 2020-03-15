@@ -36,8 +36,6 @@ LRESULT MainForm::WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 					NewFormButtonClick();
 					break;
 				}
-
-				
 			}
 
 			return 0;

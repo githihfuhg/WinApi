@@ -3,6 +3,7 @@
 Form::Form(LPCWSTR title)
 {
 	this->Title = title;
+	this->ClassName =L"Default";
 }
 Form::Form(LPCWSTR className, LPCWSTR title, HWND mainHwnd)
 {
@@ -15,17 +16,17 @@ int Form::Run()
 {
 	using std::wstring;
 	using std::string;
-	try
-	{
+	/*try
+	{*/
 		CreateForm();
 		СreateFormControls();
-	}
+	/*}
 	catch (const std::exception e)
 	{
 		MessageBoxA(nullptr, e.what(), e.what(), MB_ICONINFORMATION);
 		ExitProcess(EXIT_FAILURE);
 	}
-	
+	*/
 	ShowWindow(this->Hwnd, SW_SHOWDEFAULT);
 	UpdateWindow(this->Hwnd);
 	while(GetMessage(&Msg,nullptr,0,0))
@@ -40,6 +41,7 @@ int Form::Run()
 
 void Form::CreateForm()
 {
+	UnregisterClass(ClassName, GetModuleHandle(nullptr));
 	Wc.cbSize = sizeof(WNDCLASSEX);
 	Wc.cbClsExtra = 0; //выделение памяти в классе окна
 	Wc.cbWndExtra = 0; //выделение памяти в классе окна
@@ -48,13 +50,12 @@ void Form::CreateForm()
 	Wc.hIcon = LoadIcon(nullptr, IDI_APPLICATION);
 	Wc.hInstance = GetModuleHandle(nullptr);
 	Wc.lpfnWndProc = ApplicationProc;
-	Wc.lpszClassName = (ClassName) ? ClassName : L"Default";
+	Wc.lpszClassName = ClassName;
 	Wc.lpszMenuName = nullptr;
 	Wc.style = CS_VREDRAW | CS_HREDRAW;
 
 	if (!RegisterClassEx(&Wc))
 		throw std::runtime_error("Error can't register window class");
-
 
 
 	RECT windowRC{ 0, 0, 600, 600 };
@@ -77,19 +78,6 @@ void Form::CreateForm()
 	if (!this->Hwnd)
 			throw std::runtime_error("Error can't create window!!");
 
-
-
-	/*auto a = (ClassName) ? ClassName : ;*/
-	
-	//ShowWindow(Hwnd, /*nCmdShow*/nShowCmd); // отрисовка окна 
-	//UpdateWindow(Hwnd);  // обновление окна 
-	//while (GetMessage(&Msg, nullptr, 0, 0)) { // цикл обработки сообщений параметры ураказтель на структуру, номер окна, фильтры
-
-	//	TranslateMessage(&Msg);  // расшифровка сообщения 
-	//	DispatchMessage(&Msg); // передача собщения 
-
-	//}
-	
 }
 
 
