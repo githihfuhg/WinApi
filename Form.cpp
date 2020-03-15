@@ -1,27 +1,29 @@
 #include "Form.h"
 #include <stdexcept>
+#include "Lab1Form.h"
 
 
 Form::Form(bool IsMainWindow)
 {
-	using std::wstring;
-	using std::string;
-	/*try 
-	{*/
-		this->Form::CreateForm();
-		this->Form::ÑreateFormControls();
-	//}
-	//catch (const std::exception e)
-	//
-	//{
-	//	MessageBoxA(nullptr, e.what(), e.what(), MB_ICONINFORMATION);
-		/*ExitProcess(EXIT_FAILURE);*/
-	//}
-	//
+
+	
 }
 
 int Form::Run()
 {
+	using std::wstring;
+	using std::string;
+	try
+	{
+		CreateForm();
+		ÑreateFormControls();
+	}
+	catch (const std::exception e)
+	{
+		MessageBoxA(nullptr, e.what(), e.what(), MB_ICONINFORMATION);
+		ExitProcess(EXIT_FAILURE);
+	}
+	
 	ShowWindow(this->Hwnd, SW_SHOWDEFAULT);
 	UpdateWindow(this->Hwnd);
 	while(GetMessage(&Msg,nullptr,0,0))
@@ -55,12 +57,6 @@ void Form::CreateForm()
 
 	RECT windowRC{ 0, 0, 600, 600 };
 	AdjustWindowRect(&windowRC, WS_OVERLAPPEDWINDOW, false);
-	
-	/*Hwnd = CreateWindow(Wc.lpszClassName, 
-		L"Graphics",
-		WS_OVERLAPPEDWINDOW xor WS_THICKFRAME, 
-		350, 100, 600, 600, nullptr, nullptr,
-		Wc.hInstance, nullptr);*/ // ðåãèñòðàöèÿ êëàññà  îêíà
 
 	Hwnd = CreateWindowEx(
 		0,
@@ -76,7 +72,7 @@ void Form::CreateForm()
 		nullptr,
 		this);
 	
-	if (/*Hwnd == INVALID_HANDLE_VALUE*/!this->Hwnd)
+	if (!this->Hwnd)
 			throw std::runtime_error("Error can't create window!!");
 
 	
@@ -99,10 +95,13 @@ void Form::CreateForm()
 
 void Form::ÑreateFormControls()
 {
-	/*this->HwndButton = CreateWindowEx(0,L"BUTTON",L"Êíîïêà",WS_CHILD | BS_PUSHBUTTON|WSF_VISIBLE,56,100,238,37,this->Hwnd,reinterpret_cast<HMENU>(Form::CTL_ID::BUTTON_CLICK),nullptr,nullptr);
-	if(!this->HwndButton)
+
+	/*this->HwndButton = CreateWindow(L"BUTTON", L"Âàðèàíò 1", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 70, 91, 150, 50, this->Hwnd, reinterpret_cast<HMENU>(CTL_ID::BUTTON_CLICK), nullptr, nullptr);
+	this->HwndButton2 = CreateWindow(L"BUTTON", L"Âàðèàíò 2", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 300, 91, 150, 50, this->Hwnd, reinterpret_cast<HMENU>(CTL_ID::BUTTON_CLICK2), nullptr, nullptr);
+	if (!this->HwndButton || !this->HwndButton2)
 		throw std::runtime_error("Error can't register window class");*/
 
+	
 }
 
 

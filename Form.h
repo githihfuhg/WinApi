@@ -3,23 +3,21 @@
 #include<Windows.h>
 
 
-class Form
+ class Form
 {
 
 	protected:
-	
 		MSG Msg;
 		HWND Hwnd;
 		WNDCLASSEX Wc; /*{sizeof(WNDCLASSEX)};*/
 		virtual LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 		virtual void CreateForm();
 		virtual void ÑreateFormControls();
-		virtual enum class CTL_ID{ BUTTON_CLICK };
-		
+		Form(bool IsMainWindow);
+		~Form() = default;
 	
 	public:
-		virtual ~Form() = default;
-		Form(bool IsMainWindow);
+		
 		int Run();
 
 	private:
