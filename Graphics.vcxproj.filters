@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Lab1Form2.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Form.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -27,15 +24,18 @@
     <ClCompile Include="MainForm.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="ChildForm.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Form.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Lab1Form2.h">
+    <ClInclude Include="MainForm.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="MainForm.h">
+    <ClInclude Include="ChildForm.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

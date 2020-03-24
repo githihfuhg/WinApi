@@ -4,29 +4,33 @@
 
 
  class Form
-{
+ {
 
-	protected:
-		MSG Msg;
-		HWND Hwnd;
+	 protected:
+		HFONT hFontThamoda; // структуры описывающей шрифт текста в окне 
+		RECT WindowRC;   // структура ,описывающяя окно 
+		MSG Msg; // структура описывающаяя сообщения
+		HWND Hwnd, MainHwnd; //  хендл текущего окна и главного( хенл шлавного окна заполняется в в случае если окно является дочерним)
 		WNDCLASSEX Wc; /*{sizeof(WNDCLASSEX)};*/
-		virtual LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-		virtual void CreateForm();
-		virtual void СreateFormControls();
-		Form(LPCWSTR title);
-		Form(LPCWSTR className, LPCWSTR title,HWND mainHwnd);
-		~Form() = default;
+		virtual LRESULT CALLBACK WindowProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam); // коллбек функция обрабатыыающая сообщения 
+		virtual void CreateForm(); // функция создания окна 
+		virtual void СreateFormControls(); // функция создания контролов ( кнопок, текстбоксов и.т.д)
+		Form(LPCWSTR className, LPCWSTR title, int width, int height, int x = NULL, int y = NULL, bool isStaticWindow = true, HWND mainHwnd = nullptr);// конструктор 
+		std::wstring GetText(HWND Hwnd); // функция возвращающая текст из окна 
+		 ~Form() = default; // деструктор 
 	
+
 	public:
-		
-		int Run();
+		 int Run(); // функция, запускающаяя окно и обработку сообщений
 
 	private:
- 	    
-		HWND MainHwnd;
-		LPCWSTR ClassName;
-		LPCWSTR Title;
-		static LRESULT CALLBACK ApplicationProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+		int X; // координаты окна на экране (отступ слева)
+		int Y; //  координаты окна на экране (отступ сверху)
+		bool IsStaticWindow; // переменная отвечающая за то , будет ли окно менять размер или нет 
+		LPCWSTR ClassName; // имя класса
+		LPCWSTR Title; // заголовок
+		static LRESULT CALLBACK ApplicationProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam); // статическая коллбек функция, нужна для того , чтоб передать сообзение нестатической функции 
+
 	
-};
+ };
 

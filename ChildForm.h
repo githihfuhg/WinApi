@@ -2,7 +2,7 @@
 #include "Form.h"
 
 
-class Lab1Form2 final : public Form {
+class ChildForm final : public Form {
 private:
 	enum class CTL_ID
 	{
@@ -16,7 +16,7 @@ private:
 	
 	
 public:
-	Lab1Form2(LPCWSTR className, LPCWSTR title, HWND mainHwnd);
-	~Lab1Form2();
+	ChildForm(LPCWSTR className, LPCWSTR title, int x,int y, HWND mainHwnd);
+	~ChildForm();
 	
 };

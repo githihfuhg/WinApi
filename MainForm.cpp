@@ -1,11 +1,12 @@
 #include <stdexcept>
 #include "MainForm.h"
-#include "Lab1Form2.h"
+#include <string>
+#include "ChildForm.h"
 
-MainForm::MainForm(LPCWSTR title) : Form(title)
+MainForm::MainForm() : Form(L"MainForm",L"Lab2",1366, 768, NULL, NULL,true)
 {
-
-
+	//CreateChildForm()
+	
 }
 
 MainForm::~MainForm()
@@ -61,7 +62,7 @@ void MainForm::СreateFormControls()
 
 	HwndButton = CreateWindow(L"BUTTON", L"Вариант 1", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 25, 91, 150, 50, Hwnd, reinterpret_cast<HMENU>(CTL_ID::Button), nullptr, nullptr);
 	HwndButton2 = CreateWindow(L"BUTTON", L"Вариант 2", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 220, 91, 150, 50, Hwnd, reinterpret_cast<HMENU>(CTL_ID::Button2), nullptr, nullptr);
-	HwndNewFormButton = CreateWindow(L"BUTTON", L"Новая форма", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 420, 91, 150, 50, Hwnd, reinterpret_cast<HMENU>(CTL_ID::NewFormButton), nullptr, nullptr);
+	HwndNewFormButton = CreateWindow(L"BUTTON", L"Новая форма", WS_CHILD | WS_VISIBLE | BS_PUSHBUTTON, 1200, 91, 150, 50, Hwnd, reinterpret_cast<HMENU>(CTL_ID::NewFormButton), nullptr, nullptr);
 	if (!HwndButton || !HwndButton2 || !HwndNewFormButton)
 		throw std::runtime_error("Error can't register window class");
 
@@ -79,8 +80,26 @@ void MainForm::Button2Click()
 
 void MainForm::NewFormButtonClick()
 {
-	Lab1Form2 form2(L"NewForm",L"Form2",this->Hwnd);
-	form2.Run();
-}
 
+	std::wstring className;
+	std::wstring classTitle;
+	int counter=0;
+	
+	for (int i = 1; i < 6; i++)
+	{
+	
+		className = L"Childform" + std::to_wstring(i);
+		classTitle = std::to_wstring(i) + L"-окно";
+		if (!FindWindow(className.c_str(), classTitle.c_str()))
+		{
+
+			ChildForm form(className.c_str(), classTitle.c_str(), NULL, 50 * i, this->Hwnd);
+			form.Run();
+			break;
+		}
+
+	}
+
+	
+}
 

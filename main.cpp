@@ -7,6 +7,7 @@ processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")// ï
 
 
 int CALLBACK wWinMain(_In_ HINSTANCE hInstance,_In_opt_ HINSTANCE hPrevInstance,_In_ LPWSTR lpCmdLine,_In_ int nShowCmd){ /*HINSTANCE hInstance,HINSTANCE,PWSTR,int nCmdShow*/
- MainForm  lab1(L"Form");
+ MainForm  lab1{};
  return lab1.Run();
+
 }

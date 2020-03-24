@@ -1,10 +1,11 @@
 #pragma once
 #include "Form.h"
+#include "ChildForm.h"
 
 
 class MainForm final : public Form
 {
-	enum class CTL_ID
+	enum class CTL_ID  // перечисление, содержащее id контролов
 	{
 		Button,
 		Button2,
@@ -18,9 +19,10 @@ class MainForm final : public Form
 	void ButtonClick();
 	void Button2Click();
 	void NewFormButtonClick();
+	std::vector<ChildForm>childforms;
 	
 public:
-	MainForm(LPCWSTR title);
+	MainForm();
 	~MainForm();
 };
  
